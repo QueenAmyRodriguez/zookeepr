@@ -128,6 +128,16 @@
         "loving"
       ],
       "id": "12"
+    },
+    {
+      "name": "Pluto",
+      "species": "Wolf",
+      "diet": "carnivore",
+      "personalityTraits": [
+        "hungry",
+        "zany"
+      ],
+      "id": "13"
     }
   ]
 }
