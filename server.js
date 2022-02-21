@@ -1,16 +1,18 @@
-const express = require("express");
-const { animals } = require("./data/animals");
 const fs = require("fs");
 const path = require("path");
+const express = require("express");
+const { animals } = require("./data/animals");
+
 
 const PORT = process.env.PORT || 3001;
-
 const app = express();
 
 // parse incoming string or array data
 app.use(express.urlencoded({ extended: true }));
 // parse incoming JSON data
 app.use(express.json());
+// instructs server to make files avail
+app.use(express.static('public'));
 
 function filterByQuery(query, animalsArray) {
   let personalityTraitsArray = [];
@@ -106,6 +108,13 @@ app.get("/api/animals/:id", (req, res) => {
     res.send(404);
   }
 });
+
+// getting index to be served from our express.js server using / which is the root route of the server
+// / is used to create the homepage of a server
+app.get('/', (req, res) => {
+    // uses res.sendfile to send file we want server to read back to client
+    res.sendFile(path.join(__dirname, './public/index.html'));
+  });
 
 // route on server that accepts data to be used or stored server-side
 app.post("/api/animals", (req, res) => {
